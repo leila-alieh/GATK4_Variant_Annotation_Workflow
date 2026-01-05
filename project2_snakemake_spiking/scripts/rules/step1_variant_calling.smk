@@ -1,34 +1,4 @@
-# Snakefile
-
-configfile: "config.yaml"
-
-samples = config["samples"]
-
-ref= config["ref"]
-known_sites= config["known_sites"] 
-reads= config["reads"]
-trimmed_reads= config["trimmed_reads"]
-aligned_reads= config["aligned_reads"]
-results= config["results"]
-data= config["data"]
-mutation = config["mutation"]
-
-variant_list = ["original","spiked"]
-
-rule all:
-    input:
-        expand(f"{aligned_reads}/{{sample}}/{{variant}}/{{sample}}.dedup_bqsr.bam",
-               sample=samples,
-               variant=variant_list),
-        expand(f"{results}/{{sample}}/{{variant}}/{{sample}}.raw_variants.vcf",
-               sample=samples,
-               variant=variant_list),
-        expand(f"{results}/{{sample}}/{{variant}}/{{sample}}.raw_snps.vcf",
-               sample=samples,
-               variant=variant_list),
-        expand(f"{results}/{{sample}}/{{variant}}/{{sample}}.raw_indels.vcf",
-               sample=samples,
-               variant=variant_list)
+# step1_variant_calling.smk 
 
 rule fastqc:
     input:
