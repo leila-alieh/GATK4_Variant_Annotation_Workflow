@@ -181,12 +181,12 @@ rule call_variants:
         -R {ref}\
         -V {output.variants}\
         --select-type SNP\
-        -o {output.snp} &&
+        -O {output.snp} &&
         gatk  SelectVariants\
         -R {ref}\
         -V {output.variants}\
         --select-type INDEL\
-        -o {output.indel}      
+        -O {output.indel}      
         """
 
 
