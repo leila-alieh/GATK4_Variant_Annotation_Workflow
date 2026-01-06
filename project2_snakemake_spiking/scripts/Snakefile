@@ -1,0 +1,22 @@
+# Snakefile (main)
+
+configfile: "config.yaml" 
+
+include: "rules/step1_variant_calling.smk"
+include: "rules/step2_filter_annotate.smk"
+
+samples = config["samples"]
+ref= config["ref"]
+known_sites= config["known_sites"] 
+reads= config["reads"]
+trimmed_reads= config["trimmed_reads"]
+aligned_reads= config["aligned_reads"]
+results= config["results"]
+data= config["data"]
+mutation = config["mutation"]
+variant_list = ["original", "spiked"]
+
+
+rule all:
+    input:
+        expand(f"{results}/{{sample}}/{{variant}}/{{sample}}_analysis-ready-snps-filteredGT-functotated.vcf", sample=samples, variant=variant_list)
